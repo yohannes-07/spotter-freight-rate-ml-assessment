@@ -10,12 +10,6 @@ The data is split by date, not randomly:
 - Holdout: September 1 to October 31, 2025
 - Unlabeled validation file: November 1 to December 31, 2025
 
-This follows the real forecasting order and avoids learning from future loads. Preprocessing is fitted on the development period only. The holdout is used for early stopping and to calculate RMSE and MAE.
-
-The final model predicts rate per mile and converts it back to dollars. Training rows are weighted by distance because the same per-mile error has a larger dollar impact on a longer load. This strategy had the best average RMSE across three consecutive two-month validation periods. It is then refitted on all 48,000 labeled rows.
-
-The September-October holdout result was RMSE 632.01, MAE 106.97, and R-squared 0.828. Most of the RMSE came from a small group of extreme rates that could not be identified reliably from the available features.
-
 ## Model choice
 
 CatBoost was selected because the dataset is small, contains several categorical features, and has more than 4,000 origin-destination lanes. Some validation lanes do not appear in training. CatBoost handles these categories and unseen values directly, without one-hot encoding or manual target encoding. Hyperparameters are compared on the same chronological holdout before the final fit.
