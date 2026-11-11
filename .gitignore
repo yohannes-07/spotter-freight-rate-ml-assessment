@@ -205,6 +205,11 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
+
+# Generated model and scorer artifacts
+artifacts/
+scorer_results/
+
 # Ruff stuff:
 .ruff_cache/
 
